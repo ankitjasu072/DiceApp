@@ -1,0 +1,70 @@
+import 'dart:math';
+import 'package:flutter/material.dart';
+
+void main() {
+  return runApp(
+    MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.teal,
+        appBar: AppBar(
+          title: Text('DiceApp-Ankit Jasu'),
+          backgroundColor: Colors.teal.shade900,
+        ),
+        body: DicePage(
+        ),
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.teal,
+          child: Text("Made by Ankit Jasu",
+          textAlign: TextAlign.center,),
+        ),
+      ),
+    ),
+  );
+}
+
+
+
+class DicePage extends StatefulWidget {
+  @override
+  _DicePageState createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+
+  int leftDiceNumber1 = 1;
+  int leftDiceNumber2 = 1;
+
+  void changeDiceFace(){
+    setState(() {
+      leftDiceNumber1 = Random().nextInt(6)+1;
+      leftDiceNumber2 =  Random().nextInt(6)+1;
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: TextButton(
+              onPressed: () {
+                changeDiceFace();
+              },
+              child: Image.asset('images/dice$leftDiceNumber1.png'),
+    ),
+          ),
+          Expanded(
+            flex: 1,
+            child: TextButton(
+              onPressed: (){
+                changeDiceFace();
+              },
+              child: Image.asset('images/dice$leftDiceNumber2.png'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
